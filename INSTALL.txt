@@ -1,0 +1,87 @@
+------------------------------------------------------------------------------------------------
+(C)2013 - Matthias Hackbarth - http://www.haggybear.de
+Plesk DynDNS Control Panel
+
+History:
+1.2.1      (29.08.2013) - Bugfix while updating IP via Token-URL
+1.2        (02.08.2013) - Full Plesk 11.5 integration fix for the new Plesk vhost structure
+1.1.1      (11.07.2013) - Fixes for Plesk 11.5.x 
+1.1        (30.06.2013) - Usermanagement added to grant and remove access for other users
+1.0        (18.06.2013) - First final release including autoupdate
+0.9        (10.06.2013) - First testing beta
+------------------------------------------------------------------------------------------------
+
+Install Instructions:
+
+1)
+-Change into you Plesk Admin htdocs directory (e.g. /opt/psa/admin/htdocs)
+-Make a directory for the DynDNS Control Panel (e.g. "mkdir dcp")
+-Set chown of the directory you made above to root:psaadm ("chown root:psaadm dcp") 
+-Set chmod of the directory you made above to 755 ("chmod 777 dcp")
+-Extract all files of the ZIP into that directory
+-Set chown of all files to root:psaadm ("chown -R root:psaadm *")
+-Set chmod of all files to 755 ("chmod 755 -R *")
+-Set chmod of all txt files and directory dbs to 777 ("chmod 777 -R dbs/ *.txt")
+-Set the wrapper to chown root:root ("chown root:root sh/wrapper")
+-Set the wrapper to chmod 4755 ("chmod 4755 sh/wrapper")
+-Go into directory "dynupd" ("cd dynupd") and make 2 symlinks 1. ("ln -s ../sh") 2. ("ln -s ../dbs")
+
+The wrapper is compliled on a 64 bit system with Plesk 11. If you want (or have)
+to compile your own wrapper just do this:
+
+cd sh
+rm wrapper
+gcc wrapper.c -o wrapper
+strip wrapper
+chown root:root wrapper
+chmod 4755 wrapper
+
+============================================================================================================
+IMPORTANT THE DCP DON'T WORK ON PLESK LOWER THAN VERSION 9!!!
+============================================================================================================
+
+-make your settings in file config.inc.php
+
+2)
+-Login to your Plesk as admin
+-Make a new Custom Button with the following settings:
+
+Button label: Just choose a name ;-)
+Location: Domain administration page
+Priority: 100
+Background image: choose the dcplogo.png of the ZIP
+URL: your directory you made above an the index file (e.g. "/dcp/index.php")
+Include domain id: yes
+Include domain name: yes
+Include FTP Login: no
+Include FTP password: no
+Include client id: yes
+Include client's company name: no
+Include client's contact name: no
+Include client's e-mail: no
+Context help tip contents: whatever you want
+Open URL in the Control Panel: yes
+Visible to all sub-logins: yes (if your clients are allowed to use the glm) ["no" in Plesk 10.x]
+
+3)
+Make sure that the SOA Settings of your Domain-Nameserver are fit to use that domain as
+a DynDNS-Settings. 
+
+e.g.:
+TTL: 1 Minute
+Refresh: 5 Minutes
+Retry: 5 Minutes
+Expire: 1 Day
+Minimum: 1 Hour
+
+IF YOU'RE USING THE ADDONS WITH PLESK 10.x A SPECIAL CONTROLLER IS NEEDED!
+DOWNLOAD THE CONTROLLER AND INSTALL WITH THE INSTRUCTIONS FROM THE INSTALL.txt
+Download -> http://haggybear.de/download/psa10_controller.zip 
+
+Since Plesk 10.4.x no additional controller is needed!
+
+Thats it!
+
+Have Fun!
+
+04.05.09 Haggy (ich@haggybear.de)

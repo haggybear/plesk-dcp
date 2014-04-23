@@ -1,0 +1,132 @@
+<!--
+body { position: relative; margin: 0; width: 100%; background: #f0eeee; color: #333; font: 11px/14px tahoma, arial, helvetica, sans-serif; }
+
+.vis{display: inline;visibility: visible  }
+   
+.invis{display: none; visibility: inherit }
+.pass {  font-weight: bold; color: #009900}
+.block {  font-weight: bold; color: #CC0000}
+.fett { font-weight: bold;}
+.highlight {background-color: #FFFF00;}
+h1 { font-size: 14px;}
+#gfx a:hover {  color: #000000; background-color: #E7E7E7}
+select, input {  font-family: Arial, Helvetica, sans-serif; background-color: #FFFFFF; border: #000000; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.handC{cursor:pointer;}
+
+.alias{
+ font-weight:lighter;
+ font-style:italic;
+ }
+
+#fader {
+ z-index:10;
+ position:fixed;
+ display: none;
+ height:100%;
+ width:100%;
+ overflow:auto;
+ background:url(bg.gif);
+ filter:alpha(opacity=90); 
+ -moz-opacity: 0.90; 
+ opacity: 0.90;
+ }
+
+#iplook {
+ z-index:11;
+ display:none;
+ position:fixed;
+ width: 630px;
+ height: 450px;
+ left: 50%;
+ top: 50%;
+ margin: -225px 0px 0px -315px;
+ }
+
+#notice{
+ z-index:11;
+ display:none;
+ position:fixed;
+ width: 220px;
+ height: 115px;
+ left: 50%;
+ top: 50%;
+ margin: -50px 0px 0px -100px;
+ }
+
+#notice_content {
+ padding: 10px 10px 0;
+ overflow-y: hidden;
+ overflow-x: hidden;
+ width: 198px;
+ height: 95px;
+ border-style: solid;
+ border-width:1px;
+ border-color: #000000;
+ background:#F1F1F1;
+ color:#006600;
+ font-weight:bold;
+ }
+
+#iplook_content {
+ padding: 10px 10px 0;
+ overflow-y: auto;
+ overflow-x: hidden;
+ width: 608px;
+ height: 430px;
+ border-style: solid;
+ border-width:1px;
+ border-color: #000000;
+ background:#F1F1F1;
+ }
+
+#iplook_content td {  
+ font-family: "Courier New", Courier, mono; font-size: 11px
+ }
+
+.iplook_header {  
+ text-transform: capitalize; 
+ text-align: right; 
+ border: #000000; 
+ border-style: solid; 
+ border-top-width: 1px; 
+ border-right-width: 1px; 
+ border-bottom-width: 0px; 
+ border-left-width: 1px
+ }
+	 
+.iplook_close a{  font-weight:bold;color: #FFFFFF;}
+
+.headWL{
+width:100%;
+font-weight:bold;
+background:#CCCCCC;
+border:1px solid #CCCCCC;
+}
+
+.bodyWL{
+width:100%;
+border:1px solid #CCCCCC;
+background:#FFFFFF;
+display:none;
+}
+#fullscreen{
+border:1px dashed #FF0000;
+background:#FFFF99;
+color:#204A87;
+font-size:11px;
+height:16px;
+display:none;
+}
+
+#fullscreen_no{
+float:right;
+width:15px;
+font-size:14px;
+height:16px;
+cursor:pointer;
+border-left:1px dashed #FF0000;
+font-weight:bold;
+background:#FF0000;
+color:#FFFF99;
+}
+-->
