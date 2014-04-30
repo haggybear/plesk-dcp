@@ -20,7 +20,7 @@ class dcp extends paa{
 	private $queryString;      
 	private $allDyns;
 	private $noDyns;
-	private $saveTmp =  "\$dynhost[\"#HOSTNAME#\"] = array(\"token\" => \"#TOKEN#\",\"ipv4\" => \"#IPV4#\",\"orgipv4\" => \"#ORGIPV4#\",\"ipv6\" => \"#IPV6#\",\"orgipv6\" => \"#ORGIPV6#\");\n";
+	private $saveTmp =  "\$dynhost[\"#HOSTNAME#\"] = array(\"token\" => \"#TOKEN#\",\"ipv4\" => \"#IPV4#\",\"orgipv4\" => \"#ORGIPV4#\",\"ipv6\" => \"#IPV6#\",\"orgipv6\" => \"#ORGIPV6#\",\"ipv6iid\" => \"#IPV6IID#\",\"ipv6prefixmask\" => \"#IPV6PREFIXMASK#\");\n";
 	public $hasAccess = false;
 
 	function __construct($sess,$getVars,$db){
@@ -121,6 +121,8 @@ class dcp extends paa{
 		$saveTmp = str_replace("#ORGIPV4#",str_replace("::ffff:","",$orgipv4),$saveTmp);
 		$saveTmp = str_replace("#IPV6#",$ipv6,$saveTmp);
 		$saveTmp = str_replace("#ORGIPV6#",$orgipv6,$saveTmp);
+		$saveTmp = str_replace("#IPV6IID#",'',$saveTmp);
+		$saveTmp = str_replace("#IPV6PREFIXMASK#",'56',$saveTmp);
 
 		$this->activateCleanup($_POST["hostname"]);
 
@@ -263,7 +265,15 @@ class dcp extends paa{
 		require("dbs/hosts.php");
 		$json = array();
 		$cells = array();
-		$result = mysql_query("SELECT host,val,time_stamp FROM dns_recs WHERE type = 'A' AND host IN ('".implode("','",$this->allDyns)."') GROUP BY host");
+		$result = mysql_query("SELECT ip4.host, ip4.val AS val4, ip4.time_stamp AS time_stamp4, ip6.val AS val6, ip6.time_stamp AS time_stamp6
+			FROM dns_recs ip4
+			INNER JOIN dns_recs ip6
+			ON ip4.host = ip6.host
+			WHERE ip4.type = 'A' AND ip6.type = 'AAAA' 
+			AND ip4.host IN ('".implode("','",$this->allDyns)."')
+			AND ip6.host IN ('".implode("','",$this->allDyns)."')
+			GROUP BY host;");
+
 		$json["total"] = mysql_num_rows($result);
 		$i=0;
 		while($data = mysql_fetch_object($result)){
@@ -280,9 +290,9 @@ class dcp extends paa{
 			$cells[] = array("aktiv"=>$aktiv,
 				"view"=>$view,
 				"hostname"=>$hostname,
-				"aktip"=>$data->val,
-				"lastupd"=>date(TIME_SCHEME,strtotime($data->time_stamp)),
-				"update"=>(empty($token))?'':'<a href="http://dynupd.'.$hostname.'/index.php?token='.$token.'" target="_blank">http://dynupd.'.$hostname.'/index.php?token='.$token.'</a>');
+				"aktip"=>$data->val4,
+				"lastupd"=>date(TIME_SCHEME,strtotime($data->time_stamp4)),
+				"update"=>(empty($token))?'':$token);
 		}
 		$json["rows"] = $cells;
 		echo json_encode($json);
