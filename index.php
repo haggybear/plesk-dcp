@@ -338,9 +338,6 @@ font-weight:bold;
     <td height="5"></td>
   </tr>
 
-  <tr align="center" valign="middle"> 
-    <td height="5">&copy; <?php echo date("Y");?> <a href="http://www.haggybear.de">Matthias Hackbarth</a></td>
-  </tr>
 </table>
 <?php else:?>
 <div class="noaccess">
