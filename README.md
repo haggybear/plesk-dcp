@@ -6,4 +6,4 @@ Das Plesk DDNS Control Panel (DCP) ist ein Addon für Plesk, das es erlaubt für
 
 Unterstützt wird sowohl IPv4 als auch IPv6.
 
-Mehr Informationen in der Wiki: https://github.com/mjh1709muc/plesk-dcp/wiki
+Mehr Informationen in der Wiki: https://github.com/haggybear/plesk-dcp/wiki
